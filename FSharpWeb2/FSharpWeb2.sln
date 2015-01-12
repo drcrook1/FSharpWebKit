@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{336EA3
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpWeb2.Core", "FSharpWeb2.Core\FSharpWeb2.Core.fsproj", "{79E06CA4-FC4B-4063-9FF7-38CD1AF885C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{2E0D1511-0908-4E3B-AFC1-4159CB0A9487}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E0D1511-0908-4E3B-AFC1-4159CB0A9487}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E0D1511-0908-4E3B-AFC1-4159CB0A9487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E06CA4-FC4B-4063-9FF7-38CD1AF885C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E06CA4-FC4B-4063-9FF7-38CD1AF885C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E06CA4-FC4B-4063-9FF7-38CD1AF885C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E06CA4-FC4B-4063-9FF7-38CD1AF885C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
