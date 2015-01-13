@@ -46,6 +46,9 @@
     <None Include="Script.fsx" />
     <None Include="sqlscripts/DataStore.sql" />
     <None Include="sqlscripts\SeedData.sql" />
+    <Compile Include="Core.fs" />
+    <Compile Include="Nerd.fs" />
+    <Compile Include="FormatHelper.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
