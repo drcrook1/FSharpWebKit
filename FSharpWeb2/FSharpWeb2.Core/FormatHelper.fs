@@ -1,6 +1,7 @@
 ﻿namespace FSharpWebKit2.Core
 
 open System
+open ROP
 
 //    | FirstNameMustNotBeBlank
 //    | FirstNameMustNotBeOver255Characters
@@ -32,3 +33,11 @@ module FormatHelper =
         if s.Length < 256
         then Success s
         else Failure [LastNameMustNotBeOver255Characters]
+
+    let CreateFirstName(s:string)=
+        s |> FirstNameNotBlank
+            >>= FirstNameNotOver255Characters
+
+    let CreateLastName(s:string)=
+        s |> LastNameNotBlank
+            >>= LastNameNotOver255Characters
