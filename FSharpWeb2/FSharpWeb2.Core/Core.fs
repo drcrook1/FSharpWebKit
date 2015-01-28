@@ -33,18 +33,40 @@ type Result<'TSuccess, 'TFailure> with
         | Failure f -> f
 
 module ROP =
-    let bubbleUpR(result : Result<'TSuccess>, fa, [<ParamArray>] args) =
-        match result with
-        | Success s -> fa args
-        | Failure f -> Failure f
+    /// create a Success with no messages
+    let succeed x =
+        Success (x)
 
-    let (<*!*>) r f a = 
-        bubbleUpR(r, f, a)
+    let fail x f =
+        Failure f
 
-    let bind f i =
+    /// given a function wrapped in a result
+    /// and a value wrapped in a result
+    /// apply the function to the value only if both are Success
+    let applyR f result =
+        match f,result with
+        | Success f, Success x -> 
+            f x |> Success 
+        | Failure errs, Success (_) 
+        | Success (_), Failure errs -> 
+            errs |> Failure
+        | Failure errs1, Failure errs2 -> 
+            errs1 @ errs2 |> Failure 
+
+    /// infix version of apply
+    let (<*>) = applyR
+
+    /// given a function that transforms a value
+    /// apply it only if the result is on the Success branch
+    let liftR f result =
+        let f' =  f |> succeed
+        applyR f' result 
+
+    let (<!>) = liftR
+
+    let bind i f =
         match i with
             | Success s -> f s
             | Failure f -> Failure f
     
-    let (>>=) i f =
-        bind f i
+    let (>>=) = bind

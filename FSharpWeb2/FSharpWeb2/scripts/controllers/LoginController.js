@@ -9,6 +9,7 @@
 
     $scope.login = function () {
         var result = LoginFactory($scope.loginForm.emailAddress, $scope.loginForm.password, $scope.loginForm.rememberMe);
+        //something about result doesn't support .then
         result.then(function (result) {
             if (result.success) {
                 if ($scope.loginForm.returnUrl !== undefined) {

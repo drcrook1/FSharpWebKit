@@ -38,6 +38,8 @@ module ROP =
     /// given a function wrapped in a result
     /// and a value wrapped in a result
     /// apply the function to the value only if both are Success
+    /// Result<a> Result<b> turns into Result<a;b>
+    /// So now we do CreateNerd Result<a;b;c;d;e;f;g>
     let applyR f result =
         match f,result with
         | Success f, Success x -> 
@@ -111,18 +113,18 @@ module FormatHelper =
     let CreateFirstName(s:string)=
         s |> FirstNameNotBlank
             >>= FirstNameNotOver255Characters
-            >>= NameDoesNotContainATSymbol
+            //>>= NameDoesNotContainATSymbol
 
     let CreateLastName(s:string)=
         Console.WriteLine("Creating Last Name")
         s |> LastNameNotBlank
             >>= LastNameNotOver255Characters
-           // >>= NameDoesNotContainATSymbol
+            //>>= NameDoesNotContainATSymbol
 
 let DoStuff () =
     CreateNerd
     <!> succeed 1
-    <*> FormatHelper.CreateFirstName "D"
+    <*> FormatHelper.CreateFirstName ""
     <*> FormatHelper.CreateLastName ""
     <*> succeed "9802286278"
     <*> succeed "david@david.com"
