@@ -8,7 +8,14 @@ open System.Web
 open System.Web.Mvc
 open FSharpWeb2
 open FSharpWeb2.Models
+//suggestions from angular perspective
+//follow john papa guide.
+//convert controllers to API controllers isntead of MVC controllers.
+(*
 
+
+
+*)
 [<Authorize>]
 type AccountController =
     inherit Controller 

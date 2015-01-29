@@ -1,4 +1,4 @@
-﻿var LoginController = function ($scope, $routeParams) {
+﻿var LoginController = function ($scope, $routeParams, $location, LoginFactory) {
     $scope.loginForm = {
         emailAddress: '',
         password: '',
@@ -8,8 +8,9 @@
     };
 
     $scope.login = function () {
-        var result = LoginFactory($scope.loginForm.emailAddress, $scope.loginForm.password, $scope.loginForm.rememberMe);
+        var result = LoginFactory.login($scope.loginForm.emailAddress, $scope.loginForm.password, $scope.loginForm.rememberMe);
         //something about result doesn't support .then
+        alert(JSON.stringify(result));
         result.then(function (result) {
             if (result.success) {
                 if ($scope.loginForm.returnUrl !== undefined) {

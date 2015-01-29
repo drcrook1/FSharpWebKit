@@ -3,9 +3,9 @@
 open System
 open FSharp.Data.Sql
 
-type sqlSchema = SqlDataProvider<ConnectionString = @"Server=tcp:dzpnvmkk2x.database.windows.net,1433;Database=nerdgaming;
-                                                        User ID=drcrook@dzpnvmkk2x;Password=thepark23!;Trusted_Connection=False;
-                                                        Encrypt=True;Connection Timeout=30;", UseOptionTypes = true>
+//type sqlSchema = SqlDataProvider<ConnectionString = @"Server=tcp:dzpnvmkk2x.database.windows.net,1433;Database=nerdgaming;
+//                                                        User ID=drcrook@dzpnvmkk2x;Password=thepark23!;Trusted_Connection=False;
+//                                                        Encrypt=True;Connection Timeout=30;", UseOptionTypes = true>
 type FailureMessage =
     //Nerd Data Type Errors
     | FirstNameMustNotBeBlank

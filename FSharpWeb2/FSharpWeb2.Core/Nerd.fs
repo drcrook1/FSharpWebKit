@@ -22,9 +22,9 @@ type INerdRepository =
     abstract member Add : Nerd -> Result<Nerd>
     abstract member Update : Nerd -> Result<Nerd>
 
-type SqlServerNerdRepository (connectionString:string) =
-    let context = sqlSchema.GetDataContext()
-
-    let convertSqlToNerd(nerd : sqlSchema.dataContext.``[dbo].[Nerd]Entity``) =
-        0
+//type SqlServerNerdRepository (connectionString:string) =
+//    let context = sqlSchema.GetDataContext()
+//
+//    let convertSqlToNerd(nerd : sqlSchema.dataContext.``[dbo].[Nerd]Entity``) =
+//        0
     
