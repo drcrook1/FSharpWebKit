@@ -2,26 +2,34 @@
     'use strict';
     angular.module('app', ['ui.router'])
     .controller('HomePageController', HomePageController)
+    .factory('AuthHttpResponseInterceptor', AuthHttpResponseInterceptor)
     .config(configFunction);
+
     //.controller('LoginController', LoginController)
     //.controller('RegisterController', RegisterController)
     //.factory('AuthHttpResponseInterceptor', AuthHttpResponseInterceptor)
     //.factory('LoginFactory', LoginFactory)
-    function configFunction($stateProvider, $urlRouterProvider) {
+    function configFunction($stateProvider, $urlRouterProvider, $httpProvider) {
         $urlRouterProvider.otherwise("/one");
         $stateProvider.
             state('routeOne', {
                 url: "/one",
-                templateUrl: "views/routeOne.html"
+                templateUrl: "scripts/views/routeOne.html"
             })
             .state('routeTwo', {
                 url: "/two",
-                templateUrl: "Views/RoutesDemo/Two.cshtml"
+                templateUrl: "routesDemo/Two?donuts=3"
             })
             .state('routeThree', {
-                url: '/three',
-                templateUrl: "Views/RoutesDemo/Three.cshtml"
+                url: "/three",
+                templateUrl: "routesDemo/Three"
+            })
+            .state('login', {
+                url: "/login",
+                templateUrl: "routesDemo/Login"
             });
+        //alert(JSON.stringify($httpProvider))
+        $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
     }
 })();
 

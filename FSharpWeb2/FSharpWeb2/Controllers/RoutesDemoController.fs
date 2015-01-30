@@ -12,6 +12,9 @@ type RoutesDemoController() =
         this.ViewData.Add("Donuts", donuts)
         this.View()
     
+    member this.Login()=
+        this.View()
+
     [<Authorize>]
     member this.Three () =
         this.View()

@@ -30,7 +30,7 @@ type Startup () =
 
         let cookieAuthProvider = new CookieAuthenticationProvider(OnValidateIdentity = validIdent)
         let cookieAuthOptions = new CookieAuthenticationOptions(AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                                                                    LoginPath = new PathString("/Account/Login"),
+                                                                    LoginPath = new PathString(String.Empty), //Change this string to be what you need/want
                                                                     Provider = cookieAuthProvider)
         app.UseCookieAuthentication(cookieAuthOptions) |> ignore
         app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie)
