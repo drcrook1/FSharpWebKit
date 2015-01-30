@@ -21,3 +21,10 @@ type ValuesController() =
         if id > values.Length - 1 then
             x.BadRequest() :> _
         else x.Ok(values.[id]) :> _
+
+    /// Gets the value with index id.
+    [<Route("{id:int}")>]
+    member x.Post(id) : IHttpActionResult =
+        if ((id % 2) = 0)
+        then  x.Ok(true) :> _
+        else x.Ok(false) :> _

@@ -8,6 +8,7 @@ open System.Web
 open System.Web.Mvc
 open FSharpWeb2
 open FSharpWeb2.Models
+open System.Web.Http
 //suggestions from angular perspective
 //follow john papa guide.
 //convert controllers to API controllers isntead of MVC controllers.
@@ -17,15 +18,16 @@ open FSharpWeb2.Models
 
 *)
 [<Authorize>]
+[<RoutePrefix("api/Account")>]
 type AccountController =
-    inherit Controller 
+    inherit ApiController 
 
     [<DefaultValue>]val mutable private _userManager : ApplicationUserManager
     [<DefaultValue>]val mutable private _signInManager : ApplicationSignInManager
 
-    new() = { inherit Controller() }
+    new() = { inherit ApiController() }
     new(userManager : ApplicationUserManager, signInManager : ApplicationSignInManager) =
-        { inherit Controller() }
+        { inherit ApiController() }
 
     member x.UserManager 
         with get () = 
@@ -43,25 +45,18 @@ type AccountController =
         and set (value) =
             x._signInManager <- value
 
-    [<AllowAnonymous>]
-    member x.Login () =
-        x.View()
-
-    [<AllowAnonymous>]
-    member x.Register () =
-        x.View()
-
     [<HttpPost>]
     [<AllowAnonymous>]
-    member x.Login (model : LoginViewModel) =
-        async{
-            let! result = Async.AwaitTask(x.SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false))
-            match result with
-            | SignInStatus.Success -> return (true)
-            | _ -> 
-                x.ModelState.AddModelError("", "Invalid Login Attempt") 
-                return (false)
-        }
+    [<Route("Login")>]
+    member x.Login (model : LoginViewModel) : IHttpActionResult =
+        let r = async{
+                        let! result = Async.AwaitTask(x.SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false))
+                        return(result)
+                    }
+        let re = Async.RunSynchronously(r)
+        match re with
+        | SignInStatus.Success -> x.Ok(true) :> _
+        | _ -> x.Ok(false) :> _
 
     [<HttpPost>]
     [<AllowAnonymous>]
@@ -69,6 +64,19 @@ type AccountController =
         async{
             let user = ApplicationUser(UserName = model.Email, Email = model.Email)
             let! result = Async.AwaitTask(x.UserManager.CreateAsync(user, model.Password))
+            match result.Succeeded with
+            | false -> return (false)
+            | _ -> 
+                x.SignInManager.SignInAsync(user, false, false) |> ignore
+                return (true)
+        }
+
+    [<HttpPost>]
+    [<AllowAnonymous>]
+    member x.Register (email : string, password: string) =
+        async{
+            let user = ApplicationUser(UserName = email, Email = email)
+            let! result = Async.AwaitTask(x.UserManager.CreateAsync(user, password))
             match result.Succeeded with
             | false -> return (false)
             | _ -> 

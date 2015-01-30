@@ -11,12 +11,12 @@ open System.Web.Optimization
 type BundleConfig() =
     static member RegisterBundles (bundles:BundleCollection) =
         bundles.Add(StyleBundle("~/Content/css").Include([|"~/Content/site.css"|]))
-        bundles.Add(ScriptBundle("~/bundles/angular").Include([|"~/scripts/angular.min.js" ; "~/scripts/angular-route.min.js"|]))
+        bundles.Add(ScriptBundle("~/bundles/angular").Include([|"~/scripts/vendor/angular/angular.min.js" ; "~/scripts/vendor/angular/angular-ui-router.min.js"|]))
         bundles.Add(ScriptBundle("~/bundles/FSharpWebKit")
         .IncludeDirectory("~/scripts/controllers", "*.js")
         .IncludeDirectory("~/scripts/factories", "*.js")
-        .Include([|"~/scripts/FSharpWebKit.js"|]))
-        BundleTable.EnableOptimizations <- true
+        .Include([|"~/scripts/app.module.js"|]))
+        BundleTable.EnableOptimizations <- false
 
 /// Route for ASP.NET MVC applications
 type Route = { 

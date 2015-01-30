@@ -123,7 +123,7 @@
     <Content Include="Views\RoutesDemo\One.cshtml" />
     <Content Include="Views\RoutesDemo\Two.cshtml" />
     <Content Include="Views\RoutesDemo\Three.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Login.html" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
@@ -132,19 +132,19 @@
     </Compile>
     <Content Include="packages.config" />
     <Content Include="readme.txt" />
-    <Content Include="scripts\angular-mocks.js" />
-    <Content Include="scripts\angular.min.js.map" />
-    <Content Include="scripts\angular.min.js" />
-    <Content Include="scripts\angular.js" />
+    <Content Include="scripts\vendor\angular\angular-mocks.js" />
+    <Content Include="scripts\vendor\angular\angular.min.js.map" />
+    <Content Include="scripts\vendor\angular\angular.min.js" />
+    <Content Include="scripts\vendor\angular\angular.js" />
+    <Content Include="scripts\vendor\angular\angular-ui-router.min.js" />
+    <Content Include="scripts\vendor\angular\angular-ui-router.js" />
     <Content Include="scripts\controllers\HomePageController.js" />
     <Content Include="scripts\controllers\LoginController.js" />
     <Content Include="scripts\controllers\RegisterController.js" />
-    <Content Include="scripts\FSharpWebKit.js" />
-    <Content Include="scripts\angular-route.min.js.map" />
-    <Content Include="scripts\angular-route.min.js" />
-    <Content Include="scripts\angular-route.js" />
+    <Content Include="scripts\app.module.js" />
     <Content Include="scripts\factories\AuthHttpResponseInterceptor.js" />
     <Content Include="scripts\factories\LoginFactory.js" />
+    <None Include="scripts\views\routeOne.html" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime">

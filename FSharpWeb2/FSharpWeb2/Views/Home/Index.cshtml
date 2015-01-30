@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html ng-app="FSharpWebKit" ng-controller="HomePageController">
+<html ng-app="app">
 <head>
-    <title ng-bind="models.helloAngular"></title>
+    <title>FSharp Web Kit</title>
 </head>
 <body>
-    <input type="text" ng-model="models.helloAngular" />
-    <h1>{{models.helloAngular}}</h1>
-    <ul>
-        <li><a href="/#/routeOne">Route One</a></li>
-        <li><a href="/#/routeTwo/3">Route Two</a></li>
-        <li><a href="/#/routeThree">Route Three</a></li>
-    </ul>
-
-    <ul>
-        <li><a href="/#/login">Login</a></li>
-        <li><a href="/#/register">Register</a></li>
-    </ul>
-
-    <div ng-view></div>
+    <div ng-controller="HomePageController as HomePage">
+        <h1>{{HomePage.Title}}</h1>
+        <ul>
+            <li><a ui-sref="routeOne">Route One</a></li>
+            <li><a ui-sref="routeTwo">Route Two</a></li>
+            <li><a ui-sref="routeThree">Route Three</a></li>
+        </ul>
+        @*<ul>
+            <li><a href="/#/login">Login</a></li>
+            <li><a href="/#/register">Register</a></li>
+        </ul>*@
+        <div ui-view></div>
+    </div>
 
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/FSharpWebKit")
