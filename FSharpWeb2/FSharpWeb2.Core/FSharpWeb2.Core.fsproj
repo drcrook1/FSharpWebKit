@@ -70,6 +70,7 @@
     <Compile Include="FormatHelper.fs" />
     <Compile Include="Nerd.fs" />
     <None Include="packages.config" />
+    <None Include="tester2.fsx" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>

@@ -45,18 +45,36 @@ type AccountController =
         and set (value) =
             x._signInManager <- value
 
+    member x.HandleOKs booleanvalue =
+        x.Ok(booleanvalue)
+
     [<HttpPost>]
     [<AllowAnonymous>]
     [<Route("Login")>]
-    member x.Login (model : LoginViewModel) : IHttpActionResult =
+    member x.Login (model : LoginViewModel) : Task<IHttpActionResult> =
         let r = async{
                         let! result = Async.AwaitTask(x.SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false))
-                        return(result)
-                    }
-        let re = Async.RunSynchronously(r)
-        match re with
-        | SignInStatus.Success -> x.Ok(true) :> _
-        | _ -> x.Ok(false) :> _
+                        match result with 
+                        | SignInStatus.Success -> return x.HandleOKs(true) :> IHttpActionResult
+                        | _ ->  return x.HandleOKs(false) :> IHttpActionResult
+                        } 
+        Async.StartAsTask(r)
+
+
+//    [<HttpPost>]
+//    [<AllowAnonymous>]
+//    [<Route("Login")>]
+//    member x.Login (model : LoginViewModel) : IHttpActionResult =
+//        let r1 = x.MakeIHttpActionResult System.Net.HttpStatusCode.OK "true"
+//        let r = async{
+//                        let! result = Async.AwaitTask(x.SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false))
+//                        match result with 
+//                        | SignInStatus.Success -> return (x.Content(System.Net.HttpStatusCode.OK, true))
+//                        | _ ->  return (x.Content(System.Net.HttpStatusCode.OK, false))
+//                        } 
+//        let r' = Async.StartAsTask(r)
+//        x.Ok(r'.Result) :> _
+
 
     [<HttpPost>]
     [<AllowAnonymous>]
